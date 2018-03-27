@@ -1,6 +1,6 @@
-### Please install 'reshape2' package to use 'melt' and 'dcast' functions for tidy data set.
+#### Please install 'reshape2' package to use 'melt' and 'dcast' functions for tidy data set.
 
-## 1. Merging test set and training set to create one data set.
+### 1. Merging test set and training set to create one data set.
 
 Download and unzip the data set:
 
@@ -45,7 +45,7 @@ followed by activity ID (from "y_test.txt" and "y_train.txt") and followed by th
 
 DataSet <- cbind(rbind(subjecttest, subjecttrain), rbind(ytest, ytrain), rbind(Xtest, Xtrain))
 
-Following is also solution to the question 4:
+#### Following is also solution to the question 4:
 
 Read "features.txt" into R in order to name columns in the data set. First two columns are to be named: "Subject" and "Activity".
 The rest - columns 3 to 563 named with names from "features.txt". Features file ("features.txt") contains two columns. 
@@ -63,7 +63,7 @@ Now, 'DataSet' has test and training data sets combined with named columns. Nami
 also answers question 4 ("Appropriately label the data set with descriptive variable names").
 
 
-## 2. Extracting only the measurements on the mean and standard deviation for each measurement.
+### 2. Extracting only the measurements on the mean and standard deviation for each measurement.
 
 Extract only measurements on the mean and standard deviation for each measurement from the merged data set ('DataSet') created above into new
 data set ('DataSet1') based on the column names:
@@ -73,7 +73,7 @@ DataSet1 <- DataSet[, grepl("mean|std|Subject|Activity", colnames(DataSet)) & !g
 Values from 'meanFreq' are not extracted becasue frequency is not a measurement.
 
 
-## 3. Using descriptive activity names to name the activities in the data set.
+### 3. Using descriptive activity names to name the activities in the data set.
 
 Read "activity_labels.txt" into R:
 
@@ -96,11 +96,11 @@ q3DataSet <- q3DataSet[, c(2, 1, 69, 3:68)]
 colnames(q3DataSet)[3] <- "Activity_Description"
 
 
-## 4. Appropriately labeling the data set with descriptive variable names:
+### 4. Appropriately labeling the data set with descriptive variable names:
 This part was answered in question 1.
 
 
-## 5. From the data set in step 4, create a second, independent tidy data set with the average of each variable for each activity and each subject.
+### 5. From the data set in step 4, create a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 'melt' and 'dcast' functions from the 'reshape2' package can be applied to 'q3DataSet' in order to create a tidy data set with the average of each 
 variable for activity and subject. 'Subject' and 'Activity' columns will be identified as id variables for 'melt' function while the remaining columns 
@@ -120,4 +120,5 @@ write.table(TidySet, file = "TidySet.txt", sep = ",", row.names = FALSE)
 
 
 Note 1: after running script in the R console, final data set is stored in variable 'TidySet'.
+
 Note 2: running script may give two warnings related to the version of reshape2 package and related to duplicate of 'Activity' column. The former is caused by older versions of R that you may use. The latter is issued because both columns for 'Activity' are kept: one with activity number and the second one with activity description.
